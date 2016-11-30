@@ -1,0 +1,50 @@
+/*
+ * Copyright (c) 2016.  By moo.  All rights reserved.
+ *
+ * Email: chinaume@163.com
+ */
+
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+def netty = rootProject.ext.netty;
+def push = rootProject.ext.push;
+
+android {
+    compileSdkVersion netty.compileSdkVersion as int
+    buildToolsVersion netty.buildToolsVersion as String
+
+    defaultConfig {
+        minSdkVersion netty.minSdkVersion as int
+        targetSdkVersion netty.targetSdkVersion as int
+        versionCode netty.versionCode as int
+        versionName netty.versionName as String
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+}
+
+publish {
+    userOrg = push.userOrg
+    groupId = push.groupId
+    artifactId = push.artifactId
+    publishVersion = push.publishVersion
+    desc = push.desc
+    website = push.website
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'io.netty:netty-all:5.0.0.Alpha2'
+    compile 'com.google.code.gson:gson:2.7'
+}
+
