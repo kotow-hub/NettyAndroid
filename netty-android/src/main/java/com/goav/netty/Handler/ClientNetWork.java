@@ -11,16 +11,13 @@ import android.net.NetworkInfo;
 
 import com.goav.netty.Impl.ConnectCallBack;
 
-
-/**
- * @date: 16/11/16 20:01.<br/>
- * @author: Created by moo<br/>
- */
-
 class ClientNetWork extends ClientNetWorkIml {
 
 
     ClientNetWork() {
+    }
+
+    private void initThread() {
         thread = new Thread("Client_Thread") {
             @Override
             public void run() {
@@ -34,7 +31,6 @@ class ClientNetWork extends ClientNetWorkIml {
                 }
             }
         };
-        thread.setDaemon(true);
     }
 
 
@@ -48,6 +44,7 @@ class ClientNetWork extends ClientNetWorkIml {
     public void startListener(Context context) {
         this.mContext = context;
         this.callBack = ClientImpl.newInstances();
+        initThread();
         startLocalListener();
     }
 

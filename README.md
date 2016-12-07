@@ -59,14 +59,14 @@ ClientImpl.newInstances().request(messageSuper);
 <dependency>
   <groupId>com.goav</groupId>
   <artifactId>netty-android</artifactId>
-  <version>0.1</version>
+  <version>0.2</version>
   <type>pom</type>
 </dependency>
 ```
 
 * Gradle
 ```groovy
-compile 'com.goav:netty-android:0.1'
+compile 'com.goav:netty-android:0.2'
 ```
 
 

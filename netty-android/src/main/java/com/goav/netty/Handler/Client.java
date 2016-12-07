@@ -91,7 +91,7 @@ class Client extends ClientImpl {
             bootstrap
                     .channel(NioSocketChannel.class)
                     .group(eventLoopGroup)
-                    .option(ChannelOption.SO_KEEPALIVE, false)
+                    .option(ChannelOption.SO_KEEPALIVE, true)
                     .remoteAddress(host, port)
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
