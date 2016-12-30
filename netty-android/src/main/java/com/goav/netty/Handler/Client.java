@@ -96,7 +96,7 @@ class Client extends ClientImpl {
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new IdleStateHandler(10, 10, 10));
+                            ch.pipeline().addLast(new IdleStateHandler(60, 60, 90));
                             ch.pipeline().addLast(new EncodeHandler());
                             ch.pipeline().addLast(new DecodeHandler());
                             ch.pipeline().addLast(new CloseChannelHandler(Client.this));
@@ -110,10 +110,10 @@ class Client extends ClientImpl {
             } else {
                 throw new InterruptedException("connection fail.");
             }
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             logger.info("socketChannel连接失败");
             logger.info(e);
-            eventLoopGroup.shutdownGracefully();
+//            eventLoopGroup.shutdownGracefully();//it's can't restart when server close
             onDestroy();
             reset2Connect();
             //重置,重启
