@@ -5,7 +5,7 @@ ext {
             minSdkVersion    : 14,
             targetSdkVersion : 25,
             versionCode      : 4,
-            versionName      : "0.2.1"
+            versionName      : "0.2.2"
     ];
 
     push = [
