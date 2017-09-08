@@ -23,7 +23,7 @@ class ClientNetWork extends ClientNetWorkIml {
             public void run() {
                 while (callBack != null && mContext != null) {
                     try {
-                        Thread.sleep(3000);
+                        Thread.sleep(5000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -63,7 +63,7 @@ class ClientNetWork extends ClientNetWorkIml {
         }
     }
 
-    private boolean isNetworkAvailable() {
+    public boolean isNetworkAvailable() {
         if (mContext == null) {
             isConnect = false;
             return false;

@@ -108,6 +108,14 @@ class Client extends ClientImpl {
                 socketChannel = (SocketChannel) future.channel();
                 logger.info("socketChannel连接成功");
             } else {
+                try {
+                    //预防连接数超出系统上线
+                    future.channel().disconnect();
+                    future.channel().close();
+                    eventLoopGroup.rebuildSelectors();
+                } catch (Exception e) {
+
+                }
                 throw new InterruptedException("connection fail.");
             }
         } catch (Exception e) {
@@ -156,7 +164,7 @@ class Client extends ClientImpl {
     @Override
     protected void restart(boolean restart) {
         reset();
-        if (!getConnectState() && restart && !onDestrOY) {
+        if (!getConnectState() && restart && !onDestrOY && ClientNetWork.newInstance().isNetworkAvailable()) {
             reset2Connect();
         }
     }
