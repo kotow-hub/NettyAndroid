@@ -3,8 +3,8 @@
  [ ![Download](https://api.bintray.com/packages/1024icloud/maven/netty-android/images/download.svg) ](https://bintray.com/1024icloud/maven/netty-android/_latestVersion)
  [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/FIRHQ/fir-cli/master/LICENSE.txt)
  [![Build Status](https://travis-ci.org/goAV/NettyAndroid.svg?branch=master)](https://travis-ci.org/goAV/NettyAndroid)
- 
- 
+
+[![](https://jitpack.io/v/goAV/NettyAndroid.svg)](https://jitpack.io/#goAV/NettyAndroid)
 ### Introduction
 
 Don't worry about `socket` connect state. 
@@ -63,10 +63,24 @@ ClientImpl.newInstances().request(messageSuper);
   <type>pom</type>
 </dependency>
 ```
+or
+
+```xml
+<dependency>
+	<groupId>com.github.goAV</groupId>
+	<artifactId>NettyAndroid</artifactId>
+	<version>0.2.2</version>
+</dependency>
+```
+
 
 * Gradle
 ```groovy
-compile 'com.goav:netty-android:latest.integration'
+compile 'com.goav:netty-android:0.2.1'
+```
+or
+```groovy
+compile 'com.github.goAV:NettyAndroid:0.2.2'
 ```
 
 
