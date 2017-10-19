@@ -30,4 +30,4 @@ task javadoc(type: Javadoc) {
     options.encoding = "utf-8"
 }
 
-tasks.getByPath(":netty-android:mavenAndroidJavadocs").enabled = false
+//tasks.getByPath(":netty-android:mavenAndroidJavadocs").enabled = false
