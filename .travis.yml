@@ -26,8 +26,8 @@ cache:
 
 
 script:
-  - ./gradlew clean build
-  - ./gradlew assembleRelease --info
-
+  - ./gradlew clean build assembleRelease --info
+  - ./gradlew build jacocoTestReport --info
+  - ./gradlew connectedCheck --info
 after_script:
   - bash <(curl -s https://codecov.io/bash)

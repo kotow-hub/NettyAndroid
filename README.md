@@ -2,7 +2,7 @@
 
  [ ![Download](https://api.bintray.com/packages/1024icloud/maven/netty-android/images/download.svg) ](https://bintray.com/1024icloud/maven/netty-android/_latestVersion)
  [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/FIRHQ/fir-cli/master/LICENSE.txt)
- [![Build Status](https://travis-ci.org/goAV/NettyAndroid.svg?branch=master)](https://travis-ci.org/goAV/NettyAndroid)
+ [![Build Status](https://travis-ci.org/goAV/NettyAndroid.svg?branch=kotlin-master)](https://travis-ci.org/goAV/NettyAndroid)
 
 [![codecov](https://codecov.io/gh/goAV/NettyAndroid/branch/master/graph/badge.svg)](https://codecov.io/gh/goAV/NettyAndroid) [![](https://jitpack.io/v/goAV/NettyAndroid.svg)](https://jitpack.io/#goAV/NettyAndroid)
 ### Introduction
