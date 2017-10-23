@@ -1,0 +1,33 @@
+language: android
+#sudo: required
+sudo: false
+jdk: oraclejdk8
+android:
+  components:
+    - platform-tools
+    - tools
+    - android-25
+    - build-tools-26.0.2
+    - add-one
+    - extra-android-m2repository
+    - extra-google-m2repository
+    - extra-android-support
+  licenses:
+     - 'android-sdk-license-.+'
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+
+script:
+  - ./gradlew clean build assembleRelease
+  - ./gradlew jacocoTestReport
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
