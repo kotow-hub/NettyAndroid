@@ -16,7 +16,7 @@ import java.io.Serializable
 abstract class MessageBasic : Serializable, ChannelMessageImpl {
 
 
-    override fun toString(): String = GsonHelper.newInstances().toString()
+    override fun toString(): String = GsonHelper.newInstances().toJson(this);
 
     override fun read(): ByteArray = GsonHelper.newInstances().toJson(this).toByteArray()
 
