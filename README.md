@@ -18,3 +18,16 @@
 ### Simple
 See [`app->NettyTest.kt`](./app/src/main/java/com/goav/app/NettyTest.kt)
 
+
+### PS 
+
+* look at the [`EncodeHandler`](netty-android/src/main/java/com/goav/netty/Handler/EncodeHandler.kt)
+
+The content’s length and `int`’s length are the length of request’s body, see the [`size + 4`](netty-android/src/main/java/com/goav/netty/Handler/EncodeHandler.kt#L27)
+
+
+* look at the [`DecodeHandler`](netty-android/src/main/java/com/goav/netty/Handler/DecodeHandler.kt)
+
+The content's length and `int`'s length are the length of response's body, see the [`'in'.readInt() - 4`](netty-android/src/main/java/com/goav/netty/Handler/DecodeHandler.kt#L40)
+
+
