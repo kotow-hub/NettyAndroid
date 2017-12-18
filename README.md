@@ -8,8 +8,6 @@
 
  [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/FIRHQ/fir-cli/master/LICENSE.txt)
  [![Build Status](https://travis-ci.org/goAV/NettyAndroid.svg?branch=kotlin-master)](https://travis-ci.org/goAV/NettyAndroid)
-
-[![codecov](https://codecov.io/gh/goAV/NettyAndroid/branch/master/graph/badge.svg)](https://codecov.io/gh/goAV/NettyAndroid) 
 ### Introduction
 
 * user library of [`io.netty:netty-all:4.1.16.Final`](https://github.com/netty/netty)
@@ -18,6 +16,12 @@
 ### Simple
 See [`app->NettyTest.kt`](./app/src/main/java/com/goav/app/NettyTest.kt)
 
+### Gradle
+```groovy
+	dependencies {
+	        compile 'com.github.goAV:NettyAndroid:0.3.1'
+	}
+```
 
 ### PS 
 
