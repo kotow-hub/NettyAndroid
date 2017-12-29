@@ -41,13 +41,28 @@ internal class Client constructor() : ClientImpl, ClientOptImpl {
     private var writerIdleTimeSeconds: Int = 60
     private var allIdleTimeSeconds: Int = 90
     private var reConnect: ReConnect? = null
+    private var mThread: Thread? = null
 
     init {
         service = Executors.newSingleThreadScheduledExecutor()
         messageSupers = LinkedBlockingDeque()
         onDestrOY = false
 
-        request()
+        mThread = object : Thread("Socket_Push_Message") {
+            override fun run() {
+                while (!onDestrOY) {
+                    var message: Any?
+                    try {
+                        message = messageSupers.take()
+                        socketChannel?.writeAndFlush(message)
+                    } catch (e: InterruptedException) {
+                        e.printStackTrace()
+                    }
+                }
+            }
+        }
+
+        mThread!!.start()
     }
 
 
@@ -134,23 +149,6 @@ internal class Client constructor() : ClientImpl, ClientOptImpl {
 
     }
 
-    private fun request() {
-        object : Thread("Socket_Push_Message") {
-            override fun run() {
-                while (!onDestrOY) {
-                    var message: Any?
-                    try {
-                        message = messageSupers.take()
-                        socketChannel?.writeAndFlush(message)
-                    } catch (e: InterruptedException) {
-                        e.printStackTrace()
-                    }
-                }
-            }
-        }.start()
-    }
-
-
     override fun connect() {
         if (onDestrOY) return
         logger.info("socket 连接2s后建立")
@@ -167,6 +165,8 @@ internal class Client constructor() : ClientImpl, ClientOptImpl {
 
     override fun destroy() {
         onDestrOY = true
+        mThread?.interrupt()
+        mThread?.join()
         messageSupers.clear()
         socketChannel?.close()
         service.shutdown()
