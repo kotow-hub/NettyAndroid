@@ -19,7 +19,7 @@ See [`app->NettyTest.kt`](./app/src/main/java/com/goav/app/NettyTest.kt)
 ### Gradle
 ```groovy
 	dependencies {
-	        compile 'com.github.goAV:NettyAndroid:0.3.1'
+	        compile 'com.github.goAV:NettyAndroid:latest.release'
 	}
 ```
 
