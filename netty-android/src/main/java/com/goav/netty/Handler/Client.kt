@@ -5,6 +5,8 @@
 
 package com.goav.netty.Handler
 
+import android.system.Os.shutdown
+import android.util.TimeUtils
 import com.goav.netty.Impl.ChannelConnectImpl
 import com.goav.netty.Impl.ClientImpl
 import com.goav.netty.Impl.ClientOptImpl
@@ -42,8 +44,10 @@ internal class Client constructor() : ClientImpl, ClientOptImpl {
     private var allIdleTimeSeconds: Int = 90
     private var reConnect: ReConnect? = null
     private var mThread: Thread? = null
+    private var eventLoopGroup: NioEventLoopGroup? = null
 
     init {
+        eventLoopGroup = NioEventLoopGroup();
         service = Executors.newSingleThreadScheduledExecutor()
         messageSupers = LinkedBlockingDeque()
         onDestrOY = false
@@ -54,8 +58,13 @@ internal class Client constructor() : ClientImpl, ClientOptImpl {
                     var message: Any?
                     try {
                         message = messageSupers.take()
-                        socketChannel?.writeAndFlush(message)
-                    } catch (e: InterruptedException) {
+                        if (socketChannel == null) {
+                            request(message)
+                            TimeUnit.SECONDS.sleep(1)
+                        } else {
+                            socketChannel?.writeAndFlush(message)
+                        }
+                    } catch (e: Exception) {
                         e.printStackTrace()
                     }
                 }
@@ -95,7 +104,7 @@ internal class Client constructor() : ClientImpl, ClientOptImpl {
 
     override
     fun build(): ClientImpl {
-        val eventLoopGroup = NioEventLoopGroup()
+
         bootstrap = Bootstrap()
         bootstrap!!.channel(NioSocketChannel::class.java)
                 .group(eventLoopGroup)
@@ -121,9 +130,8 @@ internal class Client constructor() : ClientImpl, ClientOptImpl {
 
         try {
             val future = bootstrap!!.connect().sync()
-            socketChannel = future.channel() as SocketChannel
             if (future.isSuccess) {
-
+                socketChannel = future.channel() as SocketChannel
             } else {
                 socketChannel?.disconnect()
                 socketChannel?.close()
@@ -169,7 +177,29 @@ internal class Client constructor() : ClientImpl, ClientOptImpl {
         mThread?.join()
         messageSupers.clear()
         socketChannel?.close()
-        service.shutdown()
+        socketChannel = null
+        bootstrap = null
+        shutdown(service)
+        try {
+            eventLoopGroup?.shutdownGracefully()
+        } catch (e: Exception) {
+        } finally {
+            eventLoopGroup = null
+        }
+    }
+}
+
+@JvmSynthetic
+fun shutdown(service: ExecutorService): Unit {
+    service.shutdown()
+    try {
+        if (!service.awaitTermination(1, TimeUnit.SECONDS)) {
+            service.shutdownNow()
+        }
+    } catch (e: Exception) {
+
+    } finally {
+        service.shutdownNow()
     }
 }
 
