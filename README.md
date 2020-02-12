@@ -4,7 +4,7 @@
 [![GitHub release](https://img.shields.io/github/release/goAV/NettyAndroid.svg)](https://github.com/goAV/NettyAndroid/releases/latest)
 [![Github commits (since latest release)](https://img.shields.io/github/commits-since/goav/nettyandroid/latest.svg)](https://github.com/goAV/NettyAndroid/commits/kotlin-master)
 
-[![NettyAndroid](https://jitpack.io/v/goAV/NettyAndroid.svg)](https://jitpack.io/#goAV/NettyAndroid)
+[![NettyAndroid](https://jitpack.io/v/kotow-hub/NettyAndroid.svg)](https://jitpack.io/#kotow-hub/NettyAndroid)
  [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/FIRHQ/fir-cli/master/LICENSE.txt)
 [![Build Status](https://travis-ci.org/kotow-hub/NettyAndroid.svg?branch=kotlin-master)](https://travis-ci.org/kotow-hub/NettyAndroid)
 ### Introduction
@@ -18,7 +18,7 @@ See [`app->NettyTest.kt`](./app/src/main/java/com/goav/app/NettyTest.kt)
 ### Gradle
 ```groovy
 	dependencies {
-	        compile 'com.github.goAV:NettyAndroid:latest.release'
+	        compile 'com.github.kotow-hub:NettyAndroid:latest.release'
 	}
 ```
 
